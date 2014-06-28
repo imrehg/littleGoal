@@ -1,0 +1,9 @@
+{
+  "name": "littleGoal",
+  "version": "0.0.1",
+  "dependencies": {
+    "nconf": "^0.6.9",
+    "request": "^2.36.0",
+    "serialport": "^1.4.0"
+  }
+}
