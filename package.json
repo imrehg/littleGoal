@@ -1,6 +1,6 @@
 {
   "name": "littleGoal",
-  "description": "World Cup match notifier with littleBits."
+  "description": "World Cup match notifier with littleBits.",
   "version": "0.0.1",
   "repository" : {
     "type" : "git" ,
