@@ -1,6 +1,11 @@
 {
   "name": "littleGoal",
+  "description": "World Cup match notifier with littleBits."
   "version": "0.0.1",
+  "repository" : {
+    "type" : "git" ,
+    "url" : "https://github.com/imrehg/littleGoal.git"
+  },
   "dependencies": {
     "nconf": "^0.6.9",
     "request": "^2.36.0",
