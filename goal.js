@@ -31,13 +31,13 @@ var getScore = function() {
        ;
      if (status != instatus) {
        status = instatus;
-       sendInfo("2");
+       sendInfo("G");
      } else if (homeScore != inhomeScore) {
        homeScore = inhomeScore;
-       sendInfo("0");
+       sendInfo("H");
      } else if (awayScore != inawayScore) {
        awayScore = inawayScore;
-       sendInfo("1");
+       sendInfo("A");
      }
    }
 
