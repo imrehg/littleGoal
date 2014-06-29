@@ -1,15 +1,18 @@
-const int team0 =  1;      // the number of the LED pin
-const int team1 = 5;
-const int sign = 9;
+const int team0pin =  9;
+const int team1pin = 5;
+const int signpin = 1;
+
+const int swingTime = 350;  /* Less than 300 does not really work with littleBits servos /*/
+const int loopCount = 8;
 
 void setup() {
   // set the digital pin as output:
-  pinMode(team0, OUTPUT);      
-  pinMode(team1, OUTPUT);      
-  pinMode(sign, OUTPUT);      
+  pinMode(team0pin, OUTPUT);
+  pinMode(team1pin, OUTPUT);
+  pinMode(signpin, OUTPUT);
 
-  if (Serial) {
-    Serial.begin(9600);
+  if (Serial) {   /* needed by the Leonardo types */
+    Serial.begin(115200);
   }
 }
 
@@ -18,6 +21,7 @@ void loop()
   String content = "";
   char character;
 
+  /* Get the control input */
   if (Serial.available() > 0) {
 
     while(Serial.available()) {
@@ -26,48 +30,47 @@ void loop()
     }
 
     if (content != "") {
-      Serial.println(content);
+      Serial.println(content);  /* give some feedback */
       content.trim();
-      if (content == "0") {
+      if (content == "H") {
+        /* Home team score */
         cheer(0);
-      } else if (content == "1") {
+      } else if (content == "A") {
+        /* Away team score */
         cheer(1);
-      } else if (content == "2") {
+      } else if (content == "G") {
+        /* "Game" type of signal */
         cheer(2);
       }
     }
   }
 }
 
-void cheer(int team) {
-   int pin = -1;
+/* Do the cheering! */
+void cheer(int cheertype) {
+  bool team0on = false;
+  bool team1on = false;
+  bool signon = false;
 
-   if (team == 0) {
-      pin = team0;
-   } else if (team == 1) {
-      pin = team1;
-   } else {
+  if (cheertype == 0) {
+    team0on = true;
+    signon = true;
+  } else if (cheertype == 1) {
+    team1on = true;
+    signon = true;
+  } else {
+    team0on = true;
+    team1on = true;
+  }
 
-       for (int i = 0; i < 10; i++) {  
-         digitalWrite(team0, HIGH);
-         delay(100);
-         digitalWrite(team1, HIGH);
-         delay(100);
-         digitalWrite(team0, LOW);
-         delay(100);
-         digitalWrite(team1, LOW);
-         delay(100);
-       } 
-   }
-
-   if (pin >= 0) {
-     for (int i = 0; i < 10; i++) {  
-     digitalWrite(pin, HIGH);
-     digitalWrite(sign, HIGH);
-     delay(200);
-     digitalWrite(pin, LOW);
-     digitalWrite(sign, LOW);
-     delay(200);
-     }
+  for (int i = 0; i < loopCount; i++) {
+     if (team0on) { digitalWrite(team0pin, HIGH); }
+     if (team1on) { digitalWrite(team1pin, HIGH); }
+     if (signon) { digitalWrite(signpin, HIGH); }
+     delay(swingTime);
+     if (team0on) { digitalWrite(team0pin, LOW); }
+     if (team1on) { digitalWrite(team1pin, LOW); }
+     if (signon) { digitalWrite(signpin, LOW); }
+     delay(swingTime);
    }
 }
