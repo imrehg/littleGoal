@@ -2,8 +2,9 @@ const int team0pin =  9;
 const int team1pin = 5;
 const int signpin = 1;
 
-const int swingTime = 350;  /* Less than 300 does not really work with littleBits servos /*/
-const int loopCount = 8;
+const int cmdDelay = 25;  /* near the minimum amount of delay between sending command to two different servos */
+const int swingDelay = 250;
+const int loopCount = 10;
 
 void setup() {
   // set the digital pin as output:
@@ -64,13 +65,28 @@ void cheer(int cheertype) {
   }
 
   for (int i = 0; i < loopCount; i++) {
-     if (team0on) { digitalWrite(team0pin, HIGH); }
-     if (team1on) { digitalWrite(team1pin, HIGH); }
-     if (signon) { digitalWrite(signpin, HIGH); }
-     delay(swingTime);
-     if (team0on) { digitalWrite(team0pin, LOW); }
-     if (team1on) { digitalWrite(team1pin, LOW); }
-     if (signon) { digitalWrite(signpin, LOW); }
-     delay(swingTime);
+     if (team0on) {
+       digitalWrite(team0pin, HIGH);
+     }
+     if (team1on) {
+       if (team0on) { delay(cmdDelay); }
+       digitalWrite(team1pin, HIGH);
+     }
+     if (signon) {
+       digitalWrite(signpin, HIGH);
+     }
+     delay(swingDelay);
+
+     if (team0on) {
+       digitalWrite(team0pin, LOW);
+     }
+     if (team1on) {
+       if (team0on) { delay(cmdDelay); }
+       digitalWrite(team1pin, LOW);
+     }
+     if (signon) {
+       digitalWrite(signpin, LOW);
+     }
+     delay(swingDelay);
    }
 }
