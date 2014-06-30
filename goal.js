@@ -7,7 +7,7 @@ nconf.argv()
        .file({ file: 'config.json' });
 
 var serialPort = new SerialPort(nconf.get('SERIALPORT'), {
-  baudrate: 9600
+  baudrate: 115200
 });
 
 url = "http://worldcup.kimonolabs.com/api/matches/"+nconf.get('MATCHID')+"?apikey="+nconf.get('APIKEY');
