@@ -6,6 +6,9 @@
     "type" : "git" ,
     "url" : "https://github.com/imrehg/littleGoal.git"
   },
+  "scripts": {
+    "start": "node goal.js"
+  },
   "dependencies": {
     "nconf": "^0.6.9",
     "request": "^2.36.0",
