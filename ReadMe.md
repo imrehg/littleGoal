@@ -3,7 +3,7 @@
 Get notified of game results as they happen with a littleBits setup connected
 to the Internet.
 
-Full writeup is on [Instructables][instructables]
+Full writeup is posted on Instructables: [littleGoal World Cup Match Notifier][instructables].
 
 [instructables]: http://www.instructables.com/id/littleGoal-World-Cup-Match-Notifier/ "LittleGoal: World Cup Match Notifier"
 
