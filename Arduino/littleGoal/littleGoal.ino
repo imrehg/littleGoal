@@ -1,3 +1,4 @@
+/* littleGoal! notifier */
 const int team0pin =  9;
 const int team1pin = 5;
 const int signpin = 1;
